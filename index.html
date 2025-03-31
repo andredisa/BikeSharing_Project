@@ -3,13 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La mia pagina web</title>
+    <title>Benvenuto</title>
+    <!-- Collegamento al foglio di stile di Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Stile CSS per il contenitore della mappa -->
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+        <!-- Script JavaScript per la gestione della mappa -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Script JavaScript per l'integrazione della mappa di Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KBPTsGGJ62sLsC2pHgh_B-KCyNW_Vhw&callback=initMap" async></script>
+        <script src="script/initMap.js"></script>
+        <script>
+            $(document).ready(function() {
+                function initMap() {
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: 45.4642, lng: 9.1900},
+                        zoom: 12
+                    });
+                    loadStations(map);
+                }
+                initMap();
+            });
+    </script>
 </head>
 <body>
-    <h1>Benvenuto nella mia pagina web!</h1>
-    <p>Questo è un esempio di contenuto.</p>
+    <header class="container mt-5">
+        <h1>Benvenuto al Servizio di Noleggio Biciclette</h1>
+    </header>
+
+    <main class="container mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="buttons" class="mb-3">
+                    <!-- Bottone per il login -->
+                    <a id="loginButton" class="btn btn-primary mr-2" href="pagine/login.php">Login</a>
+                    <!-- Bottone per la registrazione -->
+                    <a id="registerButton" class="btn btn-primary mr-2" href="pagine/registrazione.php">Registrazione</a>
+                </div>
+            </div>
+        </div>
+        <!-- Contenitore per la mappa -->
+        <div id="map"></div>
+        
+    </main>
 </body>
 </html>
+
+
+
+
 
 
 
