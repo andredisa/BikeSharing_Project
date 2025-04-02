@@ -10,7 +10,7 @@ class gestioneDB
 
 
     public function __construct() {
-        include 'ghost_file.php';
+        include '../ghost_file.php';
         $this->servername = $servername;
         $this->username = $username;
         $this->password = $password;
