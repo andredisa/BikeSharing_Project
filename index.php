@@ -1,3 +1,5 @@
+<?php include 'config/ghost.php'; ?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15,7 +17,7 @@
         <!-- Script JavaScript per la gestione della mappa -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Script JavaScript per l'integrazione della mappa di Google Maps -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KBPTsGGJ62sLsC2pHgh_B-KCyNW_Vhw&callback=initMap" async></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?= $googleMapsApiKey ?>&callback=initMap" async></script>
         <script src="script/initMap.js"></script>
         <script>
             $(document).ready(function() {
