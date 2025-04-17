@@ -1,5 +1,5 @@
 ghost_file.php
 documentation/db/
 util/
-web_service/_config.py
-web_service/__pychache__/
+project/web_service/_config.py
+project/web_service/__pycache__/
