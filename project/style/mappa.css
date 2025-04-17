@@ -1,0 +1,4 @@
+/* Stili CSS aggiuntivi per il layout della pagina */
+#map-container {
+    height: 500px; /* Altezza desiderata per il contenitore della mappa */
+}
