@@ -1,3 +1,5 @@
 ghost_file.php
 documentation/db/
 util/
+web_service/_config.py
+web_service/__pychache__/
