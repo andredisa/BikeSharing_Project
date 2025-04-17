@@ -1,31 +1,56 @@
+<?php
+    // prendo la sessione
+    session_start();
+
+    // utente in sessione
+    if(isset($_SESSION['cliente_id'])) {
+        header("Location: mappa.php");
+        exit; // Assicurati di terminare lo script dopo aver reindirizzato
+    }
+?>
+
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Bootstrap CSS -->
+
+    <title>Login - BycicleRent</title>
+
+    <!-- IMPORTO jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Aggiungi Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- IMPORTO LO SCRIPT -->
+    <script src="../script/login.js"></script>
+
 </head>
-<body>
-    <div class="container">
+
+<body class="bg-light">
+
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card mt-5">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h1 class="mb-0">LOGIN</h1>
+                    </div>
                     <div class="card-body">
-                        <h2 class="card-title text-center">Login</h2>
-                        <form id="loginForm">
+                        <form>
                             <div class="form-group">
-                                <label for="email">E-Mail</label>
-                                <input type="text" id="email" class="form-control">
+                                <label for="mail_username">Mail o Username:</label>
+                                <input type="text" class="form-control" id="mail_username">
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" class="form-control">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" autocomplete="current-password">
                             </div>
-                            <button id="invia" type="submit" class="btn btn-primary btn-block">Login</button>
-                            <button id="home" type="button" class="btn btn-secondary btn-block">Homepage</button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="doLogin()">LOGIN</button>
                         </form>
                     </div>
                 </div>
@@ -33,38 +58,6 @@
         </div>
     </div>
 
-    <script>
-    $(document).ready(function() {
-        $("#loginForm").submit(function(event) {
-            event.preventDefault();
-            var email = $("#email").val();
-            var password = $("#password").val();
-
-            $.ajax({
-                type: "POST",
-                url: "../ajax/login_process.php",
-                data: { email: email, password: password },
-                dataType: "json",
-                success: function(response) {
-                    if (response.status === false) {
-                        alert("Credenziali errate");
-                    } else if (response.status === "admin") {
-                        window.location.href = "adminPage.php";
-                    } else if (response.status === "cliente") {
-                        window.location.href = "clientPage.php";
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Errore durante la richiesta: ", error);
-                    alert("Errore durante la richiesta. Si prega di riprovare.");
-                }
-            });
-        });
-        $("#home").click(function() {
-                window.location = "../index.html";
-        });
-    });
-</script>
-
 </body>
+
 </html>

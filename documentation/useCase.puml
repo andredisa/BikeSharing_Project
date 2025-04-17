@@ -1,54 +1,51 @@
-@startuml
-
+@startuml useCase
 left to right direction
+actor Utente
+actor Ospite
+actor Cliente
+actor Admin
+actor "Server" as S
 
-actor "utente autenticato" as UtenteAutenticato
-actor "utente non autenticato" as UtenteNonAutenticato
+Utente --> Ospite
+Utente --> Cliente
+Utente --> Admin
+Utente --> S
 
-rectangle "Pagina-1" {
-    actor "admin" as Admin
-    usecase "monitoraggio sistema" as Monitoraggio
-    usecase "manutenzione sistema" as Manutenzione
-    usecase "visualizzazione dati" as Visualizzazione
-    usecase "operazioni utente" as OperazioniUtente
-    usecase "operazioni stazione" as OperazioniStazione
-    usecase "bici libere" as BiciLibere
-    usecase "bici occupate" as BiciOccupate
-    usecase "bici da manutenzionare" as BiciDaManutenzionare
-    usecase "registrazione" as Registrazione
-    usecase "visualizzazione mappa" as VisualizzazioneMappa
-    usecase "accesso" as Accesso
-    usecase "noleggio" as Noleggio
-    usecase "riconsegna" as Riconsegna
-    usecase "visualizzazione dati riepilogo" as VisualizzazioneRiepilogo
+rectangle "Diagramma dei casi d'uso"{
+  Ospite -- (Visualizza mappa)
+  Ospite -- (Si registra)
+  (Si registra) --> (Riceve tessera elettronica)
 
-    UtenteAutenticato --> (Registrazione)
-    UtenteAutenticato --> (VisualizzazioneMappa)
-    UtenteAutenticato --> (Accesso)
-    UtenteAutenticato --> (Noleggio)
-    UtenteAutenticato --> (Riconsegna)
-    UtenteAutenticato --> (VisualizzazioneRiepilogo)
+  Cliente -- (Visualizza mappa)
+  Cliente -- (Visualizza riepiloghi)
+  Cliente -- (Si autentica)
+  Cliente -- (Noleggia bici)
+  (Noleggia bici) --> (Usa tessera elettronica)
+  Cliente -- (Consegna bici)
 
-    UtenteNonAutenticato --> (Registrazione)
-    UtenteNonAutenticato --> (VisualizzazioneMappa)
-    UtenteNonAutenticato --> (Accesso)
-    UtenteNonAutenticato --> (Noleggio)
-    UtenteNonAutenticato --> (Riconsegna)
-    UtenteNonAutenticato --> (VisualizzazioneRiepilogo)
+  rectangle "Monitoraggio servizio"{
+    Admin -- (Stampe)
+    (Stampe) --> (Operazione utenti)
+    (Stampe) --> (Operazione stazioni)
+    (Stampe) --> (Posizione bicicletta)
+    (Stampe) --> (Biciclette non riconsegnate)
+    (Stampe) --> (Biciclette in manutenzione)
+    (Stampe) --> (Slot in manutenzione)
 
-    Admin --> Monitoraggio
-    Admin --> Manutenzione
-    Admin --> Visualizzazione
-    Admin --> OperazioniUtente
-    Admin --> OperazioniStazione
-    Admin --> BiciLibere
-    Admin --> BiciOccupate
-    Admin --> BiciDaManutenzionare
+  }
 
-    OperazioniUtente ..> (Registrazione) : include
-    OperazioniUtente ..> (Accesso) : include
-    OperazioniUtente ..> (Noleggio) : include
-    OperazioniUtente ..> (Riconsegna) : include
+  rectangle "Manutenzione servizio"{
+    S -- (Inserimento bicicletta)
+    S -- (Cancellazione bicicletta)
+  }
+
+  rectangle "Gesitone servizio"{
+    S -- (Tariffazione servizio)
+    S -- (Gestione mappa)
+    S -- (Gestione utenti)
+    S -- (Gestione smart card)
+  }
+
 }
 
 @enduml
